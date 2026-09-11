@@ -490,15 +490,29 @@ window.addEventListener(
       return;
     }
 
-    const touchEndY = event.changedTouches[0].clientY;
-    const difference = touchEndY - touchStartY;
+    const touch = event.changedTouches[0];
+    const deltaY = touch.clientY - touchStartY;
+    const deltaX = touch.clientX - (event.changedTouches[0].clientX || 0);
     const swipeThreshold = 50;
 
-    if (Math.abs(difference) < swipeThreshold) {
+    if (Math.abs(deltaY) < swipeThreshold || Math.abs(deltaY) < Math.abs(deltaX)) {
       return;
     }
 
-    if (difference > 0) {
+    if (pageCanScroll()) {
+      const atTop = window.scrollY <= 8;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+
+      if (deltaY > 0 && !atTop) {
+        return;
+      }
+
+      if (deltaY < 0 && !atBottom) {
+        return;
+      }
+    }
+
+    if (deltaY > 0) {
       navigateTo(nextPage, 'next');
       return;
     }
