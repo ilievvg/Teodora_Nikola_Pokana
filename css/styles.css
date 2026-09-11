@@ -414,11 +414,13 @@ img {
   background: var(--forest);
 }
 
-.invitation-home .button[data-go-next],
-.invitation-home .button[data-go-next]:hover,
-.invitation-home .button[data-go-next]:focus-visible {
+.wax-scroll-interior .button[data-view-invitation],
+.wax-scroll-interior .button[data-view-invitation]:hover,
+.wax-scroll-interior .button[data-view-invitation]:focus-visible,
+.wax-scroll-interior .button[data-view-invitation]:active {
   border-color: transparent;
   box-shadow: none;
+  outline: none;
 }
 
 .button--filled:hover {
