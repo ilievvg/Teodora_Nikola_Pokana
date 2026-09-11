@@ -7,6 +7,7 @@ const nextPage = body.dataset.next;
 
 let navigationLocked = false;
 let touchStartY = 0;
+let touchStartX = 0;
 
 /* The invitation in reading order. The jump rail and the
   page counter are both built from this, so adding a
@@ -436,15 +437,22 @@ window.addEventListener(
       return;
     }
 
-    if (isFormElement(document.activeElement)) {
-      return;
-    }
+    const isRsvpPage = Boolean(document.querySelector('[data-rsvp-form]'));
 
-    if (pageCanScroll() && !isAtVerticalScrollBoundary(event.deltaY > 0 ? 'next' : 'previous')) {
+    if (isRsvpPage) {
+      if (event.deltaY >= 0) {
+        return;
+      }
+
+      navigateTo(previousPage, 'previous');
       return;
     }
 
     if (Math.abs(event.deltaY) < 30) {
+      return;
+    }
+
+    if (pageCanScroll() && !isAtVerticalScrollBoundary(event.deltaY > 0 ? 'next' : 'previous')) {
       return;
     }
 
@@ -471,6 +479,7 @@ window.addEventListener(
     }
 
     touchStartY = event.touches[0].clientY;
+    touchStartX = event.touches[0].clientX;
   },
   { passive: true }
 );
@@ -486,21 +495,27 @@ window.addEventListener(
       return;
     }
 
-    if (isFormElement(event.target)) {
-      return;
-    }
-
     const hasInteractiveButtonPage = document.querySelector('.wax-scroll-interior [data-view-invitation]') || document.querySelector('.invitation-home [data-go-next]');
     if (hasInteractiveButtonPage) {
       return;
     }
 
+    const isRsvpPage = Boolean(document.querySelector('[data-rsvp-form]'));
     const touch = event.changedTouches[0];
     const deltaY = touch.clientY - touchStartY;
-    const deltaX = touch.clientX - (event.changedTouches[0].clientX || 0);
+    const deltaX = touch.clientX - touchStartX;
     const swipeThreshold = 32;
 
     if (Math.abs(deltaY) < swipeThreshold || Math.abs(deltaY) < Math.abs(deltaX)) {
+      return;
+    }
+
+    if (isRsvpPage) {
+      if (deltaY <= 0) {
+        return;
+      }
+
+      navigateTo(previousPage, 'previous');
       return;
     }
 
