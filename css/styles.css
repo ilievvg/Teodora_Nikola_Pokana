@@ -361,14 +361,14 @@ img {
 ====================================================== */
 
 .button {
-  min-height: 48px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 30px;
+  padding: 12px 24px;
   border: 1px solid var(--forest);
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1712,9 +1712,11 @@ body.page-leaving {
   .button,
   .button--filled {
     width: 100%;
-    max-width: 320px;
-    padding: 15px 18px;
-    font-size: 0.95rem;
+    max-width: 280px;
+    min-height: 40px;
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
   }
 
   .button-row {

@@ -43,6 +43,21 @@ function pageCanScroll() {
   return document.documentElement.scrollHeight > window.innerHeight + 4;
 }
 
+function isAtVerticalScrollBoundary(direction) {
+  const scrollTop = window.scrollY || window.pageYOffset || 0;
+  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+  if (direction === 'next') {
+    return scrollTop <= 4;
+  }
+
+  if (direction === 'previous') {
+    return scrollTop >= maxScroll - 4;
+  }
+
+  return false;
+}
+
 function pad(value) {
   return String(value).padStart(2, '0');
 }
@@ -425,7 +440,7 @@ window.addEventListener(
       return;
     }
 
-    if (pageCanScroll()) {
+    if (pageCanScroll() && !isAtVerticalScrollBoundary(event.deltaY > 0 ? 'next' : 'previous')) {
       return;
     }
 
@@ -475,10 +490,6 @@ window.addEventListener(
       return;
     }
 
-    if (pageCanScroll()) {
-      return;
-    }
-
     const touchEndY = event.changedTouches[0].clientY;
     const difference = touchStartY - touchEndY;
     const swipeThreshold = 60;
@@ -487,7 +498,13 @@ window.addEventListener(
       return;
     }
 
-    if (difference > 0) {
+    const direction = difference > 0 ? 'next' : 'previous';
+
+    if (pageCanScroll() && !isAtVerticalScrollBoundary(direction)) {
+      return;
+    }
+
+    if (direction === 'next') {
       navigateTo(nextPage, 'next');
       return;
     }
