@@ -4,6 +4,7 @@ const hasGsap = typeof window.gsap !== 'undefined';
 
 const previousPage = body.dataset.previous;
 const nextPage = body.dataset.next;
+const previousNavigationLocked = body.hasAttribute('data-lock-previous');
 
 let navigationLocked = false;
 let touchStartY = 0;
@@ -113,6 +114,12 @@ document.querySelectorAll('[data-go-next]').forEach((control) => {
 
 document.querySelectorAll('[data-go-previous]').forEach((control) => {
   control.addEventListener('click', (event) => {
+    if (previousNavigationLocked) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     if (!previousPage) {
       return;
     }
@@ -439,12 +446,7 @@ window.addEventListener(
 
     const isRsvpPage = Boolean(document.querySelector('[data-rsvp-form]'));
 
-    if (isRsvpPage) {
-      if (event.deltaY >= 0) {
-        return;
-      }
-
-      navigateTo(previousPage, 'previous');
+    if (isRsvpPage && previousNavigationLocked) {
       return;
     }
 
@@ -510,12 +512,7 @@ window.addEventListener(
       return;
     }
 
-    if (isRsvpPage) {
-      if (deltaY <= 0) {
-        return;
-      }
-
-      navigateTo(previousPage, 'previous');
+    if (isRsvpPage && previousNavigationLocked) {
       return;
     }
 
@@ -565,6 +562,10 @@ window.addEventListener('keydown', (event) => {
   }
 
   if (previousKeys.includes(event.key)) {
+    if (previousNavigationLocked) {
+      return;
+    }
+
     event.preventDefault();
     navigateTo(previousPage, 'previous');
   }
