@@ -1766,12 +1766,15 @@ body.page-leaving {
 
   .venue-map-actions {
     width: 100%;
+    justify-content: center;
   }
 
   .venue-map-actions a {
     display: inline-flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .rsvp-form {
