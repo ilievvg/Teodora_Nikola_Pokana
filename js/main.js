@@ -621,7 +621,7 @@ if (rsvpForm) {
   const nameElement = rsvpForm.querySelector('[name="name"]');
   const attendanceElement = rsvpForm.querySelector('[name="attendance"]');
   const guestsGroup = rsvpForm.querySelector('[data-guests-group]');
-  const GOOGLE_SHEETS_WEB_APP_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+  const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwroeIPUoij-5iI6VjRrqgW-zQW7epJ5yfuMcr-_KVkJ3NQyP3ymo5xOTQ1sZ-Zjwie/exec';
 
   function syncGuestsVisibility() {
     if (!guestsGroup || !attendanceElement) {
