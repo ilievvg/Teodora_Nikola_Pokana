@@ -621,7 +621,7 @@ if (rsvpForm) {
   const nameElement = rsvpForm.querySelector('[name="name"]');
   const attendanceElement = rsvpForm.querySelector('[name="attendance"]');
   const guestsGroup = rsvpForm.querySelector('[data-guests-group]');
-  const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwroeIPUoij-5iI6VjRrqgW-zQW7epJ5yfuMcr-_KVkJ3NQyP3ymo5xOTQ1sZ-Zjwie/exec';
+  const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbznG1PjlCbUW011ZIu3dvlBzyU6hzkyWsJWJrX7EBQfvFgENebROvFPVtMHEJmpwnFa/exec';
 
   function syncGuestsVisibility() {
     if (!guestsGroup || !attendanceElement) {
@@ -683,7 +683,7 @@ if (rsvpForm) {
       timestamp: new Date().toISOString(),
     };
 
-    if (GOOGLE_SHEETS_WEB_APP_URL === 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    if (GOOGLE_SHEETS_WEB_APP_URL === 'https://script.google.com/macros/s/AKfycbznG1PjlCbUW011ZIu3dvlBzyU6hzkyWsJWJrX7EBQfvFgENebROvFPVtMHEJmpwnFa/exec') {
       setMessage('Ставете ја URL-адресата на Google Apps Script во main.js за да се испраќаат одговорите во Google Sheet.', true);
       return;
     }
