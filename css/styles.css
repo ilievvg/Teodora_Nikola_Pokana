@@ -2314,9 +2314,10 @@ body.page-leaving {
   text-align: left;
 }
 
-.wax-scroll-names i {
+
+.wax-scroll-names i.fam {
   flex: 0 0 auto;
-  font-family: inherit;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1em;
   font-style: italic;
   font-weight: 400;
@@ -2604,4 +2605,8 @@ body.page-leaving {
   .wax-scroll-prompt {
     animation: none;
   }
+}
+
+.fam {
+  font-family : 'Times New Roman', Times, serif;
 }
