@@ -698,7 +698,8 @@ if (rsvpForm) {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        const text = await response.text().catch(() => '');
+        throw new Error(`HTTP ${response.status}${text ? `: ${text}` : ''}`);
       }
     } catch (error) {
       console.error('Грешка при испраќање во Google Sheet:', error);
