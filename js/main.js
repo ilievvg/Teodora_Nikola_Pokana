@@ -491,20 +491,14 @@ window.addEventListener(
     }
 
     const touchEndY = event.changedTouches[0].clientY;
-    const difference = touchStartY - touchEndY;
-    const swipeThreshold = 60;
+    const difference = touchEndY - touchStartY;
+    const swipeThreshold = 50;
 
     if (Math.abs(difference) < swipeThreshold) {
       return;
     }
 
-    const direction = difference < 0 ? 'next' : 'previous';
-
-    if (pageCanScroll() && !isAtVerticalScrollBoundary(direction)) {
-      return;
-    }
-
-    if (direction === 'next') {
+    if (difference > 0) {
       navigateTo(nextPage, 'next');
       return;
     }
