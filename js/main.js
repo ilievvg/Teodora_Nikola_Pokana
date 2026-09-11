@@ -503,16 +503,16 @@ window.addEventListener(
       const atTop = window.scrollY <= 8;
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
 
-      if (deltaY < 0 && !atTop) {
+      if (deltaY > 0 && !atTop) {
         return;
       }
 
-      if (deltaY > 0 && !atBottom) {
+      if (deltaY < 0 && !atBottom) {
         return;
       }
     }
 
-    if (deltaY < 0) {
+    if (deltaY > 0) {
       navigateTo(previousPage, 'previous');
       return;
     }
