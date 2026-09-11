@@ -498,7 +498,7 @@ window.addEventListener(
       return;
     }
 
-    const direction = difference > 0 ? 'next' : 'previous';
+    const direction = difference < 0 ? 'next' : 'previous';
 
     if (pageCanScroll() && !isAtVerticalScrollBoundary(direction)) {
       return;

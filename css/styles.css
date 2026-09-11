@@ -414,6 +414,13 @@ img {
   background: var(--forest);
 }
 
+.wax-scroll-interior .button[data-view-invitation],
+.wax-scroll-interior .button[data-view-invitation]:hover,
+.wax-scroll-interior .button[data-view-invitation]:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
+}
+
 .button--filled:hover {
   border-color: var(--forest-dark);
   background: var(--forest-dark);
