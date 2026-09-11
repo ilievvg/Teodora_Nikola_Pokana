@@ -414,9 +414,9 @@ img {
   background: var(--forest);
 }
 
-.wax-scroll-interior .button[data-view-invitation],
-.wax-scroll-interior .button[data-view-invitation]:hover,
-.wax-scroll-interior .button[data-view-invitation]:focus-visible {
+.invitation-home .button[data-go-next],
+.invitation-home .button[data-go-next]:hover,
+.invitation-home .button[data-go-next]:focus-visible {
   border-color: transparent;
   box-shadow: none;
 }
