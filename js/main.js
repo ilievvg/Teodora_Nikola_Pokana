@@ -731,6 +731,6 @@ if (rsvpForm) {
       submitButton.textContent = 'Одговорот е испратен';
     }
 
-    window.setTimeout(() => navigateTo(nextPage, 'next'), 1600);
+    window.setTimeout(() => navigateTo('thank-you.html', 'next'), 1600);
   });
 }
