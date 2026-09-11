@@ -698,11 +698,6 @@ if (rsvpForm) {
       timestamp: new Date().toISOString(),
     };
 
-    if (GOOGLE_SHEETS_WEB_APP_URL === 'https://script.google.com/macros/s/AKfycbznG1PjlCbUW011ZIu3dvlBzyU6hzkyWsJWJrX7EBQfvFgENebROvFPVtMHEJmpwnFa/exec') {
-      setMessage('Ставете ја URL-адресата на Google Apps Script во main.js за да се испраќаат одговорите во Google Sheet.', true);
-      return;
-    }
-
     try {
       const response = await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
         method: 'POST',
