@@ -490,6 +490,11 @@ window.addEventListener(
       return;
     }
 
+    const hasInteractiveButtonPage = document.querySelector('.wax-scroll-interior [data-view-invitation]') || document.querySelector('.invitation-home [data-go-next]');
+    if (hasInteractiveButtonPage) {
+      return;
+    }
+
     const touch = event.changedTouches[0];
     const deltaY = touch.clientY - touchStartY;
     const deltaX = touch.clientX - (event.changedTouches[0].clientX || 0);
