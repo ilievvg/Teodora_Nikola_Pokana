@@ -493,7 +493,7 @@ window.addEventListener(
     const touch = event.changedTouches[0];
     const deltaY = touch.clientY - touchStartY;
     const deltaX = touch.clientX - (event.changedTouches[0].clientX || 0);
-    const swipeThreshold = 50;
+    const swipeThreshold = 32;
 
     if (Math.abs(deltaY) < swipeThreshold || Math.abs(deltaY) < Math.abs(deltaX)) {
       return;
