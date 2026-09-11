@@ -2345,11 +2345,13 @@ body.page-leaving {
 
 .wax-scroll-message {
   max-width: 44ch;
-  margin: 0 0 28px;
+  margin: 0 auto 28px;
   color: var(--ink-soft);
   font-family: var(--serif);
   font-size: clamp(1.08rem, 3vw, 1.32rem);
   line-height: 1.65;
+  text-align: center;
+  text-justify: inter-word;
   text-wrap: balance;
 }
 
