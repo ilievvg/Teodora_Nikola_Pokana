@@ -652,7 +652,7 @@ if (rsvpForm) {
 
   syncGuestsVisibility();
 
-  rsvpForm.addEventListener('submit', (event) => {
+  rsvpForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const formData = new FormData(rsvpForm);
@@ -683,11 +683,22 @@ if (rsvpForm) {
       message: message || '',
     };
 
-    try {
-      window.localStorage.setItem('wedding-rsvp', JSON.stringify(response));
-    } catch (error) {
-      // Private browsing or storage restrictions should not block the form.
-    }
+const data = new URLSearchParams({
+  name: response.name,
+  attendance: response.attendance,
+  guests: response.guests,
+  message: response.message
+});
+
+try {
+  await fetch('ТВОЈОТ_WEB_APP_URL', {
+    method: 'POST',
+    body: data,
+    mode: 'no-cors'
+  });
+} catch (error) {
+  console.error('Грешка при испраќање:', error);
+}
 
     setMessage(
       attendance === 'yes'
