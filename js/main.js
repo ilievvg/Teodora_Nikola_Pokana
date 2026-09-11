@@ -621,14 +621,13 @@ if (rsvpForm) {
   const nameElement = rsvpForm.querySelector('[name="name"]');
   const attendanceElement = rsvpForm.querySelector('[name="attendance"]');
   const guestsGroup = rsvpForm.querySelector('[data-guests-group]');
+  const GOOGLE_SHEETS_WEB_APP_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
   function syncGuestsVisibility() {
     if (!guestsGroup || !attendanceElement) {
       return;
     }
 
-    /* Hidden rather than disabled: a greyed-out control asks
-       "why not?", an absent one doesn't. */
     guestsGroup.hidden = attendanceElement.value === 'no';
   }
 
@@ -676,29 +675,36 @@ if (rsvpForm) {
       return;
     }
 
-    const response = {
+    const payload = {
       name,
       attendance,
       guests: attendance === 'no' ? '0' : (guests || '1'),
       message: message || '',
+      timestamp: new Date().toISOString(),
     };
 
-const data = new URLSearchParams({
-  name: response.name,
-  attendance: response.attendance,
-  guests: response.guests,
-  message: response.message
-});
+    if (GOOGLE_SHEETS_WEB_APP_URL === 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+      setMessage('Ставете ја URL-адресата на Google Apps Script во main.js за да се испраќаат одговорите во Google Sheet.', true);
+      return;
+    }
 
-try {
-  await fetch('ТВОЈОТ_WEB_APP_URL', {
-    method: 'POST',
-    body: data,
-    mode: 'no-cors'
-  });
-} catch (error) {
-  console.error('Грешка при испраќање:', error);
-}
+    try {
+      const response = await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams(payload).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Грешка при испраќање во Google Sheet:', error);
+      setMessage('Не успеа да се испрати одговорот. Обидете се повторно.', true);
+      return;
+    }
 
     setMessage(
       attendance === 'yes'
